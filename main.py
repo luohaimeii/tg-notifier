@@ -1,31 +1,15 @@
 import os
-import threading
-from http.server import HTTPServer, BaseHTTPRequestHandler
 import requests
 from pyrogram import Client, filters
 
-# 1. 创建一个极简的 Web 服务，用于给 Render 健康检查
-class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200)
-        self.end_headers()
-        self.wfile.write(b"Userbot is running!")
-
-def run_web_server():
-    port = int(os.environ.get("PORT", 8080))
-    server = HTTPServer(('0.0.0.0', port), SimpleHTTPRequestHandler)
-    server.serve_forever()
-
-# 后台开启 Web 监听
-threading.Thread(target=run_web_server, daemon=True).start()
-
-# 2. 从环境变量中读取配置
+# 从环境变量中读取配置
 API_ID = int(os.environ.get("39325853"))
-API_HASH = os.environ.get("API_HASH")
-SESSION_STRING = os.environ.get("009d2f87fb20e832e5226f017051d782")
+API_HASH = os.environ.get("009d2f87fb20e832e5226f017051d782")
+SESSION_STRING = os.environ.get("BQJYEJ0ATap0h19HesgMed889P-A1LwIi8X8KUh0zkAVuDCHralJsHx1Z4SPZqgo6wwLv93-vSMko-E_lCPHU1K5KS1QzpCKAua1szDtMEq0vcuxz6fRE_OxagmAXC5vSHbxDCbqxpQI8rTfB42IlrSHT2plDbiAfOqp6UU7_kC6eTpewCHO3ZcmNA0Wh_h3wTSIRvCL9BUani3XhhD8Dea9WOGmMnoSuaU-0HReZ16vfevS4ygJps4rANR6jiI5aU5cpYDOn5GPT-2hu8yqIMZlHhZvRelNKoxhD_w4fyhvwF9QcAZ0kOkJfeovoTLzP1q59DG-lL_4opYtGwAp5W6olAQlogAAAAHTBUm_AA")
 TARGET_USER = os.environ.get("hxckefuAA")  # 支持数字 ID 或字符串用户名 (如 HelloBeck)
 BARK_KEY = os.environ.get("UnxHHRdAZDq8r8ChWnWaTg")
 
+# 如果输入的 TARGET_USER 是纯数字，自动转换为 int
 if TARGET_USER and TARGET_USER.isdigit():
     TARGET_USER = int(TARGET_USER)
 
