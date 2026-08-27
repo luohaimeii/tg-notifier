@@ -1,1 +1,1 @@
-# tg-notifier
+# TG-Notifier
